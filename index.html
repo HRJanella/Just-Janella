@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+    <div class="logo">
+        <h2>HR SYSTEM</h2>
+        <p>Human Resources</p>
+    </div>
+
+    <button onclick="showPage('dashboard')" class="nav-btn">
+        📊 Dashboard
+    </button>
+
+    <button onclick="showPage('employees')" class="nav-btn">
+        👤 Employee 201 Files
+    </button>
+
+    <button onclick="showPage('leave')" class="nav-btn">
+        🗓️ Leave Tracker
+    </button>
+</div>
+
+<div class="main">
+
+    <!-- HEADER -->
+    <header>
+        <h1 id="pageTitle">Dashboard</h1>
+
+        <div class="profile">
+            HR Personnel
+        </div>
+    </header>
+
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page">
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Employees</h3>
+                <h1 id="totalEmployees">0</h1>
+            </div>
+
+            <div class="card">
+                <h3>Active Employees</h3>
+                <h1 id="activeEmployees">0</h1>
+            </div>
+
+            <div class="card">
+                <h3>Pending Leaves</h3>
+                <h1 id="pendingLeaves">0</h1>
+            </div>
+
+            <div class="card">
+                <h3>Approved Leaves</h3>
+                <h1 id="approvedLeaves">0</h1>
+            </div>
+
+        </div>
+
+        <div class="panel">
+            <h2>Quick Employee Search</h2>
+
+            <input
+                type="text"
+                id="dashboardSearch"
+                placeholder="Search Employee ID or Name..."
+                onkeyup="dashboardSearch()"
+            >
+
+            <div id="searchResults"></div>
+        </div>
+
+    </section>
+
+
+    <!-- EMPLOYEE 201 FILES -->
+    <section id="employees" class="page hidden">
+
+        <div class="panel">
+
+            <div class="panel-header">
+                <h2>Employee 201 Files</h2>
+
+                <button class="add-btn" onclick="openEmployeeModal()">
+                    + Add Employee
+                </button>
+            </div>
+
+            <input
+                type="text"
+                id="employeeSearch"
+                placeholder="Search Employee ID, Name, Department..."
+                onkeyup="displayEmployees()"
+            >
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Full Name</th>
+                        <th>Department</th>
+                        <th>Position</th>
+                        <th>Date Hired</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="employeeTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEAVE TRACKER -->
+    <section id="leave" class="page hidden">
+
+        <div class="panel">
+
+            <div class="panel-header">
+                <h2>Leave Tracker</h2>
+
+                <button class="add-btn" onclick="openLeaveModal()">
+                    + File Leave
+                </button>
+            </div>
+
+            <input
+                type="text"
+                id="leaveSearch"
+                placeholder="Search Employee or Leave Type..."
+                onkeyup="displayLeaves()"
+            >
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Leave Type</th>
+                        <th>Date From</th>
+                        <th>Date To</th>
+                        <th>Days</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="leaveTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- EMPLOYEE MODAL -->
+<div id="employeeModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeEmployeeModal()">×</span>
+
+        <h2>Add Employee</h2>
+
+        <input id="employeeID" placeholder="Employee ID">
+
+        <input id="employeeName" placeholder="Full Name">
+
+        <input id="employeeDepartment" placeholder="Department">
+
+        <input id="employeePosition" placeholder="Position">
+
+        <input id="employeeDate" type="date">
+
+        <select id="employeeStatus">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+
+        <button onclick="addEmployee()" class="save-btn">
+            Save Employee
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- LEAVE MODAL -->
+<div id="leaveModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeLeaveModal()">×</span>
+
+        <h2>File Leave</h2>
+
+        <input id="leaveEmployeeID" placeholder="Employee ID">
+
+        <input id="leaveEmployeeName" placeholder="Employee Name">
+
+        <select id="leaveType">
+
+            <option value="Vacation Leave">
+                Vacation Leave
+            </option>
+
+            <option value="Sick Leave">
+                Sick Leave
+            </option>
+
+            <option value="Emergency Leave">
+                Emergency Leave
+            </option>
+
+            <option value="Maternity Leave">
+                Maternity Leave
+            </option>
+
+            <option value="Paternity Leave">
+                Paternity Leave
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+        <label>Date From</label>
+        <input id="leaveFrom" type="date">
+
+        <label>Date To</label>
+        <input id="leaveTo" type="date">
+
+        <button onclick="addLeave()" class="save-btn">
+            Submit Leave
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
